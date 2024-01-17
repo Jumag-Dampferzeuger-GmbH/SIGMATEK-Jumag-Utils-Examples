@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<Network Name="Network0" Revision="0.0">
+	<!-- List of Components in this network -->
+	<Components>
+		<Object
+			Name       = "Class01"
+			GUID       = "{7E69A244-A6A1-45DD-9902-15DE5E52C465}"
+			Class      = "Class0"
+			Position   = "(1470,270)"
+			Visualized = "false"
+			CyclicTime = "100 ms">
+			<Channels>
+				<Server Name="ClassSvr"/>
+				<Server Name="qBlink"/>
+				<Server Name="targetTime" Value="1000"/>
+			</Channels>
+		</Object>
+	</Components>
+	<Comments>
+	</Comments>
+	<!-- List of Connections in this network -->
+	<Connections>
+	</Connections>
+	<!-- Headerfiles -->
+	<Options>
+	</Options>
+</Network>
