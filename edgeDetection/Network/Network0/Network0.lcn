@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<Network Name="Network0" Revision="0.0">
+	<!-- List of Components in this network -->
+	<Components>
+		<Object
+			Name       = "edgeDetection"
+			GUID       = "{A4338440-EF7A-4476-830A-62457F0010DF}"
+			Class      = "Class0"
+			Position   = "(2340,510)"
+			Visualized = "true"
+			CyclicTime = "100 ms">
+			<Channels>
+				<Server Name="ClassSvr"/>
+				<Server Name="fallingTriggered"/>
+				<Server Name="risingTriggered"/>
+				<Server Name="targetValue" Value="100"/>
+				<Client Name="signal" Value="0"/>
+			</Channels>
+		</Object>
+		<Object
+			Name       = "SignalGenerator1"
+			GUID       = "{FE68F4BF-B955-4CB3-8C75-D95810216DC1}"
+			Class      = "SignalGenerator"
+			Position   = "(1410,210)"
+			Visualized = "true"
+			Remotely   = "true"
+			RealTime   = "1 ms">
+			<Channels>
+				<Server Name="Amplitude" Value="200"/>
+				<Server Name="ClassSvr" Value="Sine"/>
+				<Server Name="InterfaceVersion"/>
+				<Server Name="Output"/>
+				<Server Name="PeriodicTime" Value="2000"/>
+				<Server Name="Start"/>
+				<Client Name="_Task"/>
+				<Client Name="cImpuls"/>
+				<Client Name="cOutput"/>
+				<Client Name="cRefSignal" Value="0"/>
+				<Client Name="cUserSignalTable" Value="0"/>
+			</Channels>
+			<!-- List of Networks in this component -->
+			<Networks>
+				<Network>
+					<!-- List of Components in this network -->
+					<Components>
+						<Object Name="Ar_Sinus" GUID="{23A45C33-FF1B-45A4-97D0-CC3731149747}" Class="Ar_Sinus">
+							<Channels>
+								<Server Name="Data"/>
+								<Client Name="Value"/>
+							</Channels>
+						</Object>
+						<Object Name="Interpolate50_D" GUID="{140CAD43-51B7-410D-89D3-07CB38BFF9A1}" Class="Interpolate50_D">
+							<Channels>
+								<Server Name="Error_S"/>
+								<Server Name="result"/>
+								<Client Name="table" Value="0"/>
+								<Client Name="value" Value="0"/>
+							</Channels>
+						</Object>
+					</Components>
+					<Connections>
+					</Connections>
+				</Network>
+			</Networks>
+		</Object>
+	</Components>
+	<Comments>
+	</Comments>
+	<!-- List of Connections in this network -->
+	<Connections>
+		<Connection Source="edgeDetection.signal" Destination="SignalGenerator1.Output" Vertices="(2340,600),(1942,600),"/>
+	</Connections>
+	<!-- Headerfiles -->
+	<Options>
+	</Options>
+</Network>
