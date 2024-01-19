@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<Network Name="Network0" Revision="0.0">
+	<!-- List of Components in this network -->
+	<Components>
+		<Object
+			Name       = "Class01"
+			GUID       = "{C75ECBA0-B89C-49AA-91F6-B5954CD89A89}"
+			Class      = "antoineFormular"
+			Position   = "(1200,540)"
+			Visualized = "false"
+			CyclicTime = "100 ms">
+			<Channels>
+				<Server Name="antoineTemperature"/>
+				<Server Name="ClassSvr"/>
+				<Client Name="pressure"/>
+			</Channels>
+		</Object>
+		<Object
+			Name       = "SignalGenerator1"
+			GUID       = "{A7E7C2DD-CAFF-464A-BADD-05D2C538E48F}"
+			Class      = "SignalGenerator"
+			Position   = "(330,210)"
+			Visualized = "true"
+			Remotely   = "true"
+			RealTime   = "1 ms">
+			<Channels>
+				<Server Name="Amplitude" Value="20"/>
+				<Server Name="ClassSvr"/>
+				<Server Name="InterfaceVersion"/>
+				<Server Name="Output"/>
+				<Server Name="PeriodicTime" Value="100000"/>
+				<Server Name="Start" Value="1"/>
+				<Client Name="_Task"/>
+				<Client Name="cImpuls"/>
+				<Client Name="cOutput"/>
+				<Client Name="cRefSignal"/>
+				<Client Name="cUserSignalTable"/>
+			</Channels>
+			<!-- List of Networks in this component -->
+			<Networks>
+				<Network>
+					<!-- List of Components in this network -->
+					<Components>
+						<Object Name="Ar_Sinus" GUID="{23A45C33-FF1B-45A4-97D0-CC3731149747}" Class="Ar_Sinus">
+							<Channels>
+								<Server Name="Data"/>
+								<Client Name="Value"/>
+							</Channels>
+						</Object>
+						<Object Name="Interpolate50_D" GUID="{140CAD43-51B7-410D-89D3-07CB38BFF9A1}" Class="Interpolate50_D">
+							<Channels>
+								<Server Name="Error_S"/>
+								<Server Name="result"/>
+								<Client Name="table" Value="0"/>
+								<Client Name="value" Value="0"/>
+							</Channels>
+						</Object>
+					</Components>
+					<Connections>
+					</Connections>
+				</Network>
+			</Networks>
+		</Object>
+	</Components>
+	<Comments>
+	</Comments>
+	<!-- List of Connections in this network -->
+	<Connections>
+		<Connection Source="Class01.pressure" Destination="SignalGenerator1.Output" Vertices="(1200,630),(862,600),"/>
+	</Connections>
+	<!-- Headerfiles -->
+	<Options>
+	</Options>
+</Network>
