@@ -1,0 +1,9 @@
+
+FUNCTION GLOBAL Runden
+VAR_INPUT
+	wert		: DINT;
+	stelle		: USINT;
+END_VAR
+VAR_OUTPUT
+	out			: DINT;
+END_VAR;

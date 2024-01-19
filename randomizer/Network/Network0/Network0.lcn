@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<Network Name="Network0" Revision="0.0">
+	<!-- List of Components in this network -->
+	<Components>
+		<Object
+			Name       = "Class01"
+			GUID       = "{7C7549C0-FD60-4A3C-B892-F133D20F6F1F}"
+			Class      = "Class0"
+			Position   = "(1560,510)"
+			Visualized = "false"
+			CyclicTime = "100 ms">
+			<Channels>
+				<Server Name="ClassSvr"/>
+				<Server Name="iTestRnd"/>
+				<Server Name="iTestRndDefault"/>
+				<Client Name="iSeed" Value="-25"/>
+			</Channels>
+		</Object>
+		<Object
+			Name       = "SignalGenerator1"
+			GUID       = "{3510C191-5E6C-4810-9D68-502435E7AF4D}"
+			Class      = "SignalGenerator"
+			Position   = "(660,240)"
+			Visualized = "true"
+			Remotely   = "true"
+			RealTime   = "1 ms">
+			<Channels>
+				<Server Name="Amplitude" Value="1000"/>
+				<Server Name="ClassSvr" Value="Sine"/>
+				<Server Name="InterfaceVersion"/>
+				<Server Name="Output"/>
+				<Server Name="PeriodicTime" Value="2000"/>
+				<Server Name="Start"/>
+				<Client Name="_Task"/>
+				<Client Name="cImpuls"/>
+				<Client Name="cOutput"/>
+				<Client Name="cRefSignal"/>
+				<Client Name="cUserSignalTable"/>
+			</Channels>
+			<!-- List of Networks in this component -->
+			<Networks>
+				<Network>
+					<!-- List of Components in this network -->
+					<Components>
+						<Object Name="Ar_Sinus" GUID="{23A45C33-FF1B-45A4-97D0-CC3731149747}" Class="Ar_Sinus">
+							<Channels>
+								<Server Name="Data"/>
+								<Client Name="Value"/>
+							</Channels>
+						</Object>
+						<Object Name="Interpolate50_D" GUID="{140CAD43-51B7-410D-89D3-07CB38BFF9A1}" Class="Interpolate50_D">
+							<Channels>
+								<Server Name="Error_S"/>
+								<Server Name="result"/>
+								<Client Name="table" Value="0"/>
+								<Client Name="value" Value="0"/>
+							</Channels>
+						</Object>
+					</Components>
+					<Connections>
+					</Connections>
+				</Network>
+			</Networks>
+		</Object>
+	</Components>
+	<Comments>
+	</Comments>
+	<!-- List of Connections in this network -->
+	<Connections>
+		<Connection Source="Class01.iSeed" Destination="SignalGenerator1.Output" Vertices="(1560,600),(1192,630),"/>
+	</Connections>
+	<!-- Headerfiles -->
+	<Options>
+	</Options>
+</Network>
