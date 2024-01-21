@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <Project
 	Version            = "13"
-	Name               = "functionTrigger"
-	OnlineConnection   = "SchulungTsy"
+	Name               = "math"
 	SolutionType       = "Large"
 	WriteSrvListOnSave = "true"
 	CLASSType          = "true">
-	<OnlineConnectionInfo>
-		<RS232 ConfigName="SchulungTsy" BUS="1" Password="" PORT="COM6" BAUD="57600" Favorite="1"/>
-	</OnlineConnectionInfo>
 	<HeaderFiles>
 		<File Path=".\Include\unit.h"/>
 		<File Path=".\Include\global.h"/>
@@ -19,10 +15,12 @@
 		<File Path=".\Include\C_types.h"/>
 		<File Path=".\Include\C_channels.h"/>
 		<File Path=".\Include\lslpublictypes.h"/>
+		<File Path=".\Source\cConstants.h"/>
 	</HeaderFiles>
 	<ClassFiles>
 		<File Path=".\Class\Class0\Class0.st"/>
-		<File Path=".\Source\functionTrigger.c"/>
+		<File Path=".\Source\math.c"/>
+		<File Path=".\Source\randomizer.c"/>
 	</ClassFiles>
 	<NetworkFiles>
 		<File Path=".\Network\Network0\Network0.lcn"/>

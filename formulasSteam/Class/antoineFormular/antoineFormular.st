@@ -104,13 +104,12 @@ FUNCTION antoineFormular::@STD
 END_FUNCTION
 
 //{{LSL_IMPLEMENTATION
-
 Function Global __cdecl antoineFormT
 VAR_INPUT
-  pressure : REAL;
+  INPUT : REAL;
 END_VAR
 VAR_OUTPUT
-  result : REAL;
+  Q : REAL;
 END_VAR;
 
 FUNCTION VIRTUAL GLOBAL antoineFormular::CyWork
@@ -123,7 +122,7 @@ FUNCTION VIRTUAL GLOBAL antoineFormular::CyWork
   
   pressure := pressure.Read();
   
-  antoineTemperature := antoineFormT(pressure:= TO_REAL(pressure));
+  antoineTemperature := antoineFormT(INPUT:= to_real(pressure) );
 
 	state := READY;
 

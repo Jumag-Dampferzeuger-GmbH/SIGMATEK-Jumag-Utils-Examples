@@ -119,12 +119,12 @@ END_FUNCTION
 // Declaration of C Function
 Function Global __cdecl functionTrigger
 VAR_INPUT 
-  currentTime : UDINT;
-  timeStamp : ^UDINT;
-  targetTime : UDINT;
+  CURR_TIME : UDINT;
+  TIME_STAMP : ^UDINT;
+  TAR_TIME : UDINT;
 END_VAR
 VAR_OUTPUT
-  result : BOOL;
+  Q : BOOL;
 END_VAR;
 
 
@@ -138,11 +138,8 @@ FUNCTION VIRTUAL GLOBAL Class0::CyWork
   VAR
   	functionTimeStamp : ^UDINT; 
   END_VAR
-
   
-   
-  
-  if (functionTrigger(currentTime := ops.tAbsolute, timeStamp := functionTimeStamp, targetTime := 1000)) then
+  if (functionTrigger(CURR_TIME := ops.tAbsolute, TIME_STAMP := functionTimeStamp, TAR_TIME := 1000)) then
     qblink := true;
   else
     qBlink := false; 

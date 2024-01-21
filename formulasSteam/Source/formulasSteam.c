@@ -5,10 +5,10 @@
 
 Function Global __cdecl antoineFormT
 VAR_INPUT
-  pressure : REAL;
+  INPUT : REAL;
 END_VAR
 VAR_OUTPUT
-  result : REAL;
+  Q : REAL;
 END_VAR;
 
 */

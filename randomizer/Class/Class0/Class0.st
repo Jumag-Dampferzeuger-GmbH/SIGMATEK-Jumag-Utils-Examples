@@ -109,7 +109,7 @@ FUNCTION Class0::@STD
 END_FUNCTION
 
 //{{LSL_IMPLEMENTATION
-Function Global __cdecl linKongGen
+Function Global __cdecl linCongGen
 VAR_INPUT 
   INPUT : DINT;
   FACTOR : DINT; 
@@ -117,7 +117,7 @@ VAR_INPUT
   MODULO : DINT; 
 END_VAR
 VAR_OUTPUT
-  result : DINT;
+  Q : DINT;
 END_VAR;
 
 
@@ -132,8 +132,8 @@ FUNCTION VIRTUAL GLOBAL Class0::CyWork
 
   iSeed := iSeed.Read();
 
-  iTestRndDefault := linKongGen(INPUT:=iSeed, FACTOR:=0, INCREMENT:=0, MODULO:=0);  // linear congruential generator with default parameters
-  iTestRnd := linKongGen(INPUT:=iSeed, FACTOR:=10, INCREMENT:=42, MODULO:=9000);
+  iTestRndDefault := linCongGen(INPUT:=iSeed, FACTOR:=0, INCREMENT:=0, MODULO:=0);  // linear congruential generator with default parameters
+  iTestRnd := linCongGen(INPUT:=iSeed, FACTOR:=10, INCREMENT:=42, MODULO:=9000);
   
   
   

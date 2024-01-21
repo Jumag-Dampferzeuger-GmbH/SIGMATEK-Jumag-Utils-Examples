@@ -134,23 +134,23 @@ END_FUNCTION
 
 //{{LSL_IMPLEMENTATION
 Function Global __cdecl rTrig_DINT
-VAR_INPUT 
-  inputSignal : DINT;
-  prevSignal : ^DINT;
-  triggerVal : DINT;
+VAR_INPUT
+  INPUT : DINT;
+  PREV : ^DINT;
+  TRIGGER : DINT;
 END_VAR
 VAR_OUTPUT
-  result : BOOL;
+  Q : BOOL;
 END_VAR;
 
 Function Global __cdecl fTrig_DINT
 VAR_INPUT
-  inputSignal : DINT;
-  prevSignal : ^DINT;
-  triggerVal : DINT;
+  INPUT : DINT;
+  PREV : ^DINT;
+  TRIGGER : DINT;
 END_VAR
 VAR_OUTPUT
-  result : BOOL;
+  Q : BOOL;
 END_VAR;
 
 FUNCTION VIRTUAL GLOBAL Class0::CyWork
@@ -165,9 +165,9 @@ FUNCTION VIRTUAL GLOBAL Class0::CyWork
   
   signal := signal.Read();
   
-  risingTriggered := rTrig_DINT(inputSignal:= signal, prevSignal:= #oldSignal0, triggerVal:= targetValue);
+  risingTriggered := rTrig_DINT(INPUT:= signal, PREV:= #oldSignal0, TRIGGER:= targetValue);
 
-  fallingTriggered := fTrig_DINT(inputSignal:= signal, prevSignal:= #oldSignal1, triggerVal:= targetValue);
+  fallingTriggered := fTrig_DINT(INPUT:= signal, PREV:= #oldSignal1, TRIGGER:= targetValue);
   
 	state := READY;
 
