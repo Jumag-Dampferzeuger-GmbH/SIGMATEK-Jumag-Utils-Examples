@@ -41,7 +41,7 @@
 		<File Path=".\Tools\Tools.lcp"/>
 	</LibraryFiles>
 	<Options>
-		<Target UseFPU="true" Processor="ARM">
+		<Target UseFPU="true">
 		</Target>
 		<Compiler
 			CompilerVersion         = "72"

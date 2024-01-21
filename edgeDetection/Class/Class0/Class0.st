@@ -41,6 +41,8 @@ Class0 : CLASS
   //Clients:
 	signal 	: CltCh_DINT;
   //Variables:
+		oldSignal0 	: DINT;
+		oldSignal1 	: DINT;
   //Functions:
 	
 	FUNCTION VIRTUAL GLOBAL CyWork
@@ -159,16 +161,13 @@ FUNCTION VIRTUAL GLOBAL Class0::CyWork
 		state (EAX) 	: UDINT;
 	END_VAR
   
-  VAR
-  	oldSignal0 : ^DINT; 
-    oldSignal1 : ^DINT; 
-  END_VAR
+
   
   signal := signal.Read();
   
-  risingTriggered := rTrig_DINT(inputSignal:= signal, prevSignal:= oldSignal0, triggerVal:= targetValue);
+  risingTriggered := rTrig_DINT(inputSignal:= signal, prevSignal:= #oldSignal0, triggerVal:= targetValue);
 
-  fallingTriggered := fTrig_DINT(inputSignal:= signal, prevSignal:= oldSignal1, triggerVal:= targetValue);
+  fallingTriggered := fTrig_DINT(inputSignal:= signal, prevSignal:= #oldSignal1, triggerVal:= targetValue);
   
 	state := READY;
 

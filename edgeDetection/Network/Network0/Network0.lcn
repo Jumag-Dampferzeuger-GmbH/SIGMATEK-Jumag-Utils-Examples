@@ -30,8 +30,8 @@
 				<Server Name="ClassSvr" Value="Sine"/>
 				<Server Name="InterfaceVersion"/>
 				<Server Name="Output"/>
-				<Server Name="PeriodicTime" Value="2000"/>
-				<Server Name="Start"/>
+				<Server Name="PeriodicTime" Value="10000"/>
+				<Server Name="Start" Value="1"/>
 				<Client Name="_Task"/>
 				<Client Name="cImpuls"/>
 				<Client Name="cOutput"/>
