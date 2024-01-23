@@ -5,15 +5,38 @@
 		<Object
 			Name       = "Class01"
 			GUID       = "{72C09951-4BF4-4948-B4A9-044577DB4FE5}"
-			Class      = "Class0"
-			Position   = "(2220,390)"
+			Class      = "min_max"
+			Position   = "(2130,60)"
 			Visualized = "false"
 			CyclicTime = "100 ms">
 			<Channels>
 				<Server Name="ClassSvr"/>
+				<Server Name="fMaxArrayResult"/>
 				<Server Name="fMaxResult"/>
 				<Server Name="fMinArrayResult"/>
 				<Server Name="fMinResult"/>
+			</Channels>
+		</Object>
+		<Object
+			Name       = "comparing1"
+			GUID       = "{964F07B9-A79A-4BE6-95D8-FB4EBA1DE72F}"
+			Class      = "comparing"
+			Position   = "(2130,660)"
+			Visualized = "false"
+			CyclicTime = "100 ms">
+			<Channels>
+				<Server Name="ClassSvr"/>
+			</Channels>
+		</Object>
+		<Object
+			Name       = "Finite_Finity1"
+			GUID       = "{079ABD7C-CBE8-4BC5-80BE-E10912D60CC5}"
+			Class      = "Finite_Finity"
+			Position   = "(2130,480)"
+			Visualized = "false"
+			CyclicTime = "100 ms">
+			<Channels>
+				<Server Name="ClassSvr"/>
 			</Channels>
 		</Object>
 	</Components>

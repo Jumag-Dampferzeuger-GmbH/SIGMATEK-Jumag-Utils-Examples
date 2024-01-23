@@ -10,7 +10,7 @@
 
 (*!
 <Class
-	Name               = "Class0"
+	Name               = "min_max"
 	Revision           = "0.0"
 	GUID               = "{B8400413-2B42-415B-9E1C-B50DE06CC02C}"
 	RealtimeTask       = "false"
@@ -26,6 +26,7 @@
 	Objectsize         = "(284,120)">
 	<Channels>
 		<Server Name="ClassSvr" GUID="{C8D1DDD9-0038-463B-B31C-E9591FEA5CB4}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
+		<Server Name="fMaxArrayResult" GUID="{C33DF000-CF29-4539-BEBE-FC9A308C411A}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 		<Server Name="fMaxResult" GUID="{BC430DF8-B0E7-44AD-A2B3-04E9A8206FB3}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 		<Server Name="fMinArrayResult" GUID="{599CB7CC-59FA-4372-80AE-F6B8A234182B}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 		<Server Name="fMinResult" GUID="{FBE552F4-9FD4-475F-B1D5-47BBD52EF5C0}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
@@ -39,12 +40,13 @@
 	</Dependencies>
 </Class>
 *)
-Class0 : CLASS
+min_max : CLASS
   //Servers:
 	ClassSvr 	: SvrChCmd_DINT;
 	fMinResult 	: SvrCh_REAL;
 	fMaxResult 	: SvrCh_REAL;
 	fMinArrayResult 	: SvrCh_REAL;
+	fMaxArrayResult 	: SvrCh_REAL;
   //Clients:
   //Variables:
 		fTestValue0 	: REAL;
@@ -73,32 +75,33 @@ END_CLASS;
 //}}LSL_DECLARATION
 
 
-FUNCTION GLOBAL TAB Class0::@CT_
+FUNCTION GLOBAL TAB min_max::@CT_
 0$UINT,
-2#0100000000000010$UINT, //TY_CLASS0
-0$UINT, 0$UINT, (SIZEOF(::Class0))$UINT, 
-4$UINT, 0$UINT, 0$UINT, 
-TO_UDINT(1594949027), "Class0", //Class
+2#0100000000000010$UINT, //TY_MIN_MAX
+0$UINT, 0$UINT, (SIZEOF(::min_max))$UINT, 
+5$UINT, 0$UINT, 0$UINT, 
+TO_UDINT(282775726), "min_max", //Class
 TO_UDINT(0), 0, 0$UINT, 0$UINT, //Baseclass
 //Servers:
-(::Class0.ClassSvr.pMeth)$UINT, _CH_CMD$UINT, 2#0000000000000000$UINT, TO_UDINT(619352855), "ClassSvr", 
-(::Class0.fMinResult.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(793086741), "fMinResult", 
-(::Class0.fMaxResult.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(4172167508), "fMaxResult", 
-(::Class0.fMinArrayResult.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(3715294436), "fMinArrayResult", 
+(::min_max.ClassSvr.pMeth)$UINT, _CH_CMD$UINT, 2#0000000000000000$UINT, TO_UDINT(619352855), "ClassSvr", 
+(::min_max.fMinResult.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(793086741), "fMinResult", 
+(::min_max.fMaxResult.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(4172167508), "fMaxResult", 
+(::min_max.fMinArrayResult.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(3715294436), "fMinArrayResult", 
+(::min_max.fMaxArrayResult.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(1683259285), "fMaxArrayResult", 
 //Clients:
 END_FUNCTION
 
 
-#define USER_CNT_Class0 0
+#define USER_CNT_min_max 0
 
 TYPE
 	_LSL_STD_VMETH	: STRUCT
 			CmdTable	: CMDMETH;
-			UserFcts	: ARRAY[0..USER_CNT_Class0] OF ^Void;
+			UserFcts	: ARRAY[0..USER_CNT_min_max] OF ^Void;
 	END_STRUCT;
 END_TYPE
 
-FUNCTION Class0::@STD
+FUNCTION min_max::@STD
 	VAR_OUTPUT
 		ret_code	: CONFSTATES;
 	END_VAR
@@ -107,7 +110,7 @@ FUNCTION Class0::@STD
 	END_VAR
 
 	//Command Methods
-	InitCmdTable (nCmd := nSTDCMD + USER_CNT_Class0, pCmd := #vmt.CmdTable);
+	InitCmdTable (nCmd := nSTDCMD + USER_CNT_min_max, pCmd := #vmt.CmdTable);
 	vmt.CmdTable.Init		:= #Init();
 	vmt.CmdTable.CyWork		:= #CyWork();
 	ClassSvr.pMeth		:= StoreCmd (pCmd := #vmt.CmdTable, SHARED);
@@ -140,6 +143,24 @@ VAR_OUTPUT
   Q : REAL;
 END_VAR;
 
+Function Global __cdecl fMax
+VAR_INPUT
+  CMP1 : REAL;
+  CMP2 : REAL; 
+END_VAR
+VAR_OUTPUT
+  Q : REAL;
+END_VAR;
+
+Function Global __cdecl aMax
+VAR_INPUT
+  INPUT : ^REAL;
+  SIZE : DINT; 
+END_VAR
+VAR_OUTPUT
+  Q : REAL;
+END_VAR;
+
 Function Global __cdecl linCongGen
 VAR_INPUT 
   INPUT : DINT;
@@ -156,7 +177,7 @@ END_VAR;
  which are only necessary for creating pseudo data for the array
 *)
 
-FUNCTION VIRTUAL GLOBAL Class0::CyWork
+FUNCTION VIRTUAL GLOBAL min_max::CyWork
 	VAR_INPUT
 		EAX 	: UDINT;
 	END_VAR
@@ -167,8 +188,10 @@ FUNCTION VIRTUAL GLOBAL Class0::CyWork
   
   // get the min Values 
   fMinResult      := fMin(CMP1:= fTestValue0 , CMP2:= fTestValue1);
-  fMinArrayResult := aMin(INPUT:=#aTestData[0], SIZE:=ARRAY_SIZE);
-  
+  fMaxResult      := fMax(CMP1:= fTestValue0, CMP2:= fTestValue1);
+   
+  fMinArrayResult := aMin(INPUT:=#aTestData[0], SIZE:=ARRAY_SIZE); // Solution 1 for passing array size
+  fMaxArrayResult := aMax(INPUT:=#aTestData[0], SIZE:=sizeof(aTestData)/4); // Solution 2 for passing array size 
   
 
 	state := READY;
@@ -176,7 +199,7 @@ FUNCTION VIRTUAL GLOBAL Class0::CyWork
 END_FUNCTION
 
 
-FUNCTION VIRTUAL GLOBAL Class0::Init 
+FUNCTION VIRTUAL GLOBAL min_max::Init 
   VAR
   	i : SINT; 
   END_VAR

@@ -18,9 +18,11 @@
 		<File Path=".\Source\cConstants.h"/>
 	</HeaderFiles>
 	<ClassFiles>
-		<File Path=".\Class\Class0\Class0.st"/>
+		<File Path=".\Class\min_max\min_max.st"/>
 		<File Path=".\Source\math.c"/>
 		<File Path=".\Source\randomizer.c"/>
+		<File Path=".\Class\comparing\comparing.st"/>
+		<File Path=".\Class\Finite_Finity\Finite_Finity.st"/>
 	</ClassFiles>
 	<NetworkFiles>
 		<File Path=".\Network\Network0\Network0.lcn"/>
