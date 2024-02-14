@@ -10,6 +10,7 @@
 			Visualized = "false"
 			CyclicTime = "100 ms">
 			<Channels>
+				<Server Name="antoinePressure"/>
 				<Server Name="antoineTemperature"/>
 				<Server Name="ClassSvr"/>
 				<Client Name="pressure"/>
@@ -28,7 +29,7 @@
 				<Server Name="ClassSvr" Value="Sine"/>
 				<Server Name="InterfaceVersion"/>
 				<Server Name="Output"/>
-				<Server Name="PeriodicTime" Value="10000"/>
+				<Server Name="PeriodicTime" Value="1000000"/>
 				<Server Name="Start" Value="1"/>
 				<Client Name="_Task"/>
 				<Client Name="cImpuls"/>

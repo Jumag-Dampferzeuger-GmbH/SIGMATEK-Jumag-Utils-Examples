@@ -19,6 +19,7 @@
 	SharedCommandTable = "true"
 	Objectsize         = "(624,120)">
 	<Channels>
+		<Server Name="antoinePressure" GUID="{7F6C6C50-1771-4924-84EF-6A90A88EB8E9}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 		<Server Name="antoineTemperature" GUID="{290E524A-6F6C-43F6-B668-F3ECCBCF0F39}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 		<Server Name="ClassSvr" GUID="{FCED4DDD-820C-4DAF-BD8E-BC9397752A6E}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 		<Client Name="pressure" Required="true" Internal="false"/>
@@ -34,6 +35,7 @@ antoineFormular : CLASS
   //Servers:
 	ClassSvr 	: SvrChCmd_DINT;
 	antoineTemperature 	: SvrCh_REAL;
+	antoinePressure 	: SvrCh_REAL;
   //Clients:
 	pressure 	: CltCh_DINT;
   //Variables:
@@ -61,12 +63,13 @@ FUNCTION GLOBAL TAB antoineFormular::@CT_
 0$UINT,
 2#0100000000000010$UINT, //TY_ANTOINEFORMULAR
 0$UINT, 0$UINT, (SIZEOF(::antoineFormular))$UINT, 
-2$UINT, 1$UINT, 0$UINT, 
+3$UINT, 1$UINT, 0$UINT, 
 TO_UDINT(1233525762), "antoineFormular", //Class
 TO_UDINT(0), 0, 0$UINT, 0$UINT, //Baseclass
 //Servers:
 (::antoineFormular.ClassSvr.pMeth)$UINT, _CH_CMD$UINT, 2#0000000000000000$UINT, TO_UDINT(619352855), "ClassSvr", 
 (::antoineFormular.antoineTemperature.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(4097045647), "antoineTemperature", 
+(::antoineFormular.antoinePressure.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(3774398742), "antoinePressure", 
 //Clients:
 (::antoineFormular.pressure.pCh)$UINT, _CH_CLT_DATA$UINT, 2#0000000000000010$UINT, TO_UDINT(2577153067), "pressure", 
 END_FUNCTION
@@ -112,6 +115,14 @@ VAR_OUTPUT
   Q : REAL;
 END_VAR;
 
+Function Global __cdecl antoineFormP
+VAR_INPUT
+  INPUT : REAL;
+END_VAR
+VAR_OUTPUT
+  Q : REAL;
+END_VAR;
+
 FUNCTION VIRTUAL GLOBAL antoineFormular::CyWork
 	VAR_INPUT
 		EAX 	: UDINT;
@@ -123,6 +134,8 @@ FUNCTION VIRTUAL GLOBAL antoineFormular::CyWork
   pressure := pressure.Read();
   
   antoineTemperature := antoineFormT(INPUT:= to_real(pressure) );
+  
+  antoinePressure := antoineFormP(INPUT:=antoineTemperature);
 
 	state := READY;
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<Network Name="Network0" Revision="0.0">
+	<!-- List of Components in this network -->
+	<Components>
+		<Object
+			Name       = "tof1"
+			GUID       = "{311A5EF7-8C2D-4E5A-9C1F-D3CCE4C47C19}"
+			Class      = "tof"
+			Position   = "(2130,210)"
+			Visualized = "false"
+			CyclicTime = "100 ms">
+			<Channels>
+				<Server Name="ClassSvr"/>
+				<Server Name="elapsedTime"/>
+				<Server Name="input"/>
+				<Server Name="targetTime" Value="10000"/>
+			</Channels>
+		</Object>
+		<Object
+			Name       = "ton1"
+			GUID       = "{97EA8C81-95FE-453C-BBE7-78ACC6AA332C}"
+			Class      = "ton"
+			Position   = "(2130,660)"
+			Visualized = "false"
+			CyclicTime = "100 ms">
+			<Channels>
+				<Server Name="ClassSvr"/>
+				<Server Name="elapsedTime"/>
+				<Server Name="input"/>
+				<Server Name="targetTime" Value="10000"/>
+			</Channels>
+		</Object>
+	</Components>
+	<Comments>
+	</Comments>
+	<!-- List of Connections in this network -->
+	<Connections>
+	</Connections>
+	<!-- Headerfiles -->
+	<Options>
+	</Options>
+</Network>

@@ -1,3 +1,5 @@
+#include "cConstants.h"
+
 /*DECLARATION IN LASAL CLASS 2
 
 
@@ -17,7 +19,7 @@ END_VAR;
 // - PARAM_A and PARAM_B are optional parameters, if value "0" passed, default values will be used
 // - do not use this for cryptographic purposes
 // - modulo operator is limiting the range of the result
-#include "cConstants.h"
+
 extern "C" int linCongGen(int iStart, int iFactor, int iIncrement, int iModulo) 
 {
     // Default values

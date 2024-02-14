@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <Project
 	Version            = "13"
-	Name               = "scaling"
+	Name               = "delay"
 	SolutionType       = "Large"
 	WriteSrvListOnSave = "true"
 	CLASSType          = "true">
@@ -15,21 +15,11 @@
 		<File Path=".\Include\C_types.h"/>
 		<File Path=".\Include\C_channels.h"/>
 		<File Path=".\Include\lslpublictypes.h"/>
-		<File Path=".\SystemTypes.h" Global="true"/>
-		<File Path=".\Source\code\OsiBaseNew.h"/>
-		<File Path=".\Source\code\Global_Functions\H_Runden_Def.h" Global="true"/>
-		<File Path=".\Source\code\Global_Functions\H_Interpol_Def.h" Global="true"/>
 	</HeaderFiles>
 	<ClassFiles>
-		<File Path=".\Class\Class0\Class0.st"/>
-		<File Path=".\Source\scaling.c"/>
-		<File Path=".\Source\code\OsiBaseNew.st"/>
-		<File Path=".\Class\_TaskObjectControl\_TaskObjectControl.st"/>
-		<File Path=".\Source\code\Global_Functions\Runden.st"/>
-		<File Path=".\Source\code\Global_Functions\Interpol.st"/>
-		<File Path=".\Class\Ar_Sinus\Ar_Sinus.st"/>
-		<File Path=".\Class\Interpolate50_D\Interpolate50_D.st"/>
-		<File Path=".\Class\SignalGenerator\SignalGenerator.st"/>
+		<File Path=".\Class\ton\ton.st"/>
+		<File Path=".\Class\tof\tof.st"/>
+		<File Path=".\Source\delay.c"/>
 	</ClassFiles>
 	<NetworkFiles>
 		<File Path=".\Network\Network0\Network0.lcn"/>
@@ -69,21 +59,6 @@
 			PrjInternal = ".\ProjectInternal\">
 		</Directories>
 	</Options>
-	<SigmatekFolders>
-		<Folder Name="Tools">
-			<Folder Name="Interpolation">
-				<Class Name="Interpolate50_D"/>
-			</Folder>
-			<Folder Name="Logic">
-				<Folder Name="Arithmetic">
-					<Class Name="Ar_Sinus"/>
-				</Folder>
-			</Folder>
-			<Folder Name="Miscellaneous">
-				<Class Name="SignalGenerator"/>
-			</Folder>
-		</Folder>
-	</SigmatekFolders>
 	<Units>
 		<UnitGrp Name="Acceleration">
 			<Unit Name="mmPsec2" Factor="1" Ref="S"/>
