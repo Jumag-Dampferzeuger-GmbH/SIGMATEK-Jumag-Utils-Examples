@@ -134,7 +134,7 @@ VAR_INPUT
   HEX_SYSTIME : HDINT;
 END_VAR
 VAR_OUTPUT
-  Q : DINT;
+  Q : UINT;
 END_VAR;
 
 Function Global __cdecl getMinutesFromSysTime
@@ -142,7 +142,7 @@ VAR_INPUT
   HEX_SYSTIME : HDINT;
 END_VAR
 VAR_OUTPUT
-  Q : DINT;
+  Q : UINT;
 END_VAR;
 
 Function Global __cdecl getHoursFromSysTime
@@ -150,7 +150,7 @@ VAR_INPUT
   HEX_SYSTIME : HDINT;
 END_VAR
 VAR_OUTPUT
-  Q : DINT;
+  Q : UINT;
 END_VAR;
 
 Function Global __cdecl getDayFromSysDate
@@ -158,7 +158,7 @@ VAR_INPUT
   HEX_SYSDATE : HDINT;
 END_VAR
 VAR_OUTPUT
-  Q : DINT;
+  Q : UINT;
 END_VAR;
 
 Function Global __cdecl getMonthFromSysDate
@@ -166,7 +166,7 @@ VAR_INPUT
   HEX_SYSDATE : HDINT;
 END_VAR
 VAR_OUTPUT
-  Q : DINT;
+  Q : UINT;
 END_VAR;
 
 Function Global __cdecl getYearFromSysDate
@@ -174,7 +174,7 @@ VAR_INPUT
   HEX_SYSDATE : HDINT;
 END_VAR
 VAR_OUTPUT
-  Q : DINT;
+  Q : UINT;
 END_VAR;
 
 FUNCTION VIRTUAL GLOBAL dateTimeComponents::CyWork

@@ -6,12 +6,12 @@ VAR_INPUT
   HEX_SYSTIME : HDINT;
 END_VAR
 VAR_OUTPUT
-  Q : DINT;
+  Q : UINT;
 END_VAR;
 
 */
 
-extern "C" int getSecondsFromSysTime(long int iTime)
+extern "C" unsigned int getSecondsFromSysTime(long int iTime)
 {
     return (iTime >> 8) & 0xFF;
 }
@@ -23,11 +23,11 @@ VAR_INPUT
   HEX_SYSTIME : HDINT;
 END_VAR
 VAR_OUTPUT
-  Q : DINT;
+  Q : UINT;
 END_VAR;
 
 */
-extern "C" int getMinutesFromSysTime(long int iTime)
+extern "C" unsigned int getMinutesFromSysTime(long int iTime)
 {
     return (iTime >> 16) & 0xFF;
 }
@@ -39,11 +39,11 @@ VAR_INPUT
   HEX_SYSTIME : HDINT;
 END_VAR
 VAR_OUTPUT
-  Q : DINT;
+  Q : UINT;
 END_VAR;
 
 */
-extern "C" int getHoursFromSysTime(long int iTime)
+extern "C" unsigned int getHoursFromSysTime(long int iTime)
 {
     return (iTime >> 24) & 0xFF;
 }
@@ -55,11 +55,11 @@ VAR_INPUT
   HEX_SYSDATE : HDINT;
 END_VAR
 VAR_OUTPUT
-  Q : DINT;
+  Q : UINT;
 END_VAR;
 
 */
-extern "C" int getDayFromSysDate(long int iTime)
+extern "C" unsigned int getDayFromSysDate(long int iTime)
 {
     return (iTime >> 4) & 0xFF;
 }
@@ -71,11 +71,11 @@ VAR_INPUT
   HEX_SYSDATE : HDINT;
 END_VAR
 VAR_OUTPUT
-  Q : DINT;
+  Q : UINT;
 END_VAR;
 
 */
-extern "C" int getMonthFromSysDate(long int iTime)
+extern "C" unsigned int getMonthFromSysDate(long int iTime)
 {
     return (iTime >> 12) & 0xF;
 }
@@ -87,11 +87,11 @@ VAR_INPUT
   HEX_SYSDATE : HDINT;
 END_VAR
 VAR_OUTPUT
-  Q : DINT;
+  Q : UINT;
 END_VAR;
 
 */
-extern "C" int getYearFromSysDate(long int iTime)
+extern "C" unsigned int getYearFromSysDate(long int iTime)
 {
     return (iTime >> 16) & 0xFFFF;
 }
