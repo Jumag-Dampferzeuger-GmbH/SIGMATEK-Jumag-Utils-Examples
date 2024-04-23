@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<Network Name="Network0" Revision="0.0">
+	<!-- List of Components in this network -->
+	<Components>
+		<Object
+			Name           = "_SysDateTime1"
+			GUID           = "{E0F404E1-76F4-48EE-9820-A8FB8F696720}"
+			Class          = "_SysDateTime"
+			Position       = "(1230,330)"
+			Visualized     = "true"
+			Remotely       = "true"
+			BackgroundTime = "100 ms">
+			<Channels>
+				<Server Name="DayOfWeek"/>
+				<Server Name="SysDate"/>
+				<Server Name="SysTime"/>
+				<Client Name="DoSummerTime" Value="0"/>
+				<Client Name="System"/>
+			</Channels>
+			<!-- List of Networks in this component -->
+			<Networks>
+				<Network>
+					<!-- List of Components in this network -->
+					<Components>
+						<Object Name="SummerTime" GUID="{8D5F918A-029E-4326-8E46-99E55244583F}" Class="Ram">
+							<Channels>
+								<Server Name="Data"/>
+							</Channels>
+						</Object>
+					</Components>
+					<Connections>
+					</Connections>
+				</Network>
+			</Networks>
+		</Object>
+		<Object
+			Name       = "dateTimeComponents1"
+			GUID       = "{8F2A15F2-1F1E-458B-85E7-D461A891806B}"
+			Class      = "dateTimeComponents"
+			Position   = "(1980,330)"
+			Visualized = "false"
+			CyclicTime = "100 ms">
+			<Channels>
+				<Server Name="ClassSvr"/>
+				<Server Name="Day"/>
+				<Server Name="Hour"/>
+				<Server Name="Minute"/>
+				<Server Name="Month"/>
+				<Server Name="Second"/>
+				<Server Name="Year"/>
+				<Client Name="cSysDate"/>
+				<Client Name="cSysTime"/>
+			</Channels>
+		</Object>
+	</Components>
+	<Comments>
+	</Comments>
+	<!-- List of Connections in this network -->
+	<Connections>
+		<Connection Source="dateTimeComponents1.cSysDate" Destination="_SysDateTime1.SysDate" Vertices="(1980,420),(1530,420),"/>
+		<Connection Source="dateTimeComponents1.cSysTime" Destination="_SysDateTime1.SysTime" Vertices="(1980,480),(1530,480),"/>
+	</Connections>
+	<!-- Headerfiles -->
+	<Options>
+	</Options>
+</Network>
