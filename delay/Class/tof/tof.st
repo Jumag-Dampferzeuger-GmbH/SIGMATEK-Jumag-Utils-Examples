@@ -23,6 +23,7 @@
 		<Server Name="elapsedTime" GUID="{3F4B7D44-C3FF-4AE7-BA6D-5013B6BE3510}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 		<Server Name="input" GUID="{3EB9B1B5-7347-43EC-9233-FAF6ACE818D7}" Visualized="false" Initialize="false" WriteProtected="false" Retentive="false"/>
 		<Server Name="targetTime" GUID="{E2E6B492-1684-468D-87E8-B2F1BED05C88}" Visualized="false" Initialize="true" DefValue="10000" WriteProtected="false" Retentive="false"/>
+		<Server Name="timeStamp" GUID="{EAEEEBE3-13F2-457E-AB19-F818E65DCA17}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 	</Channels>
 	<Dependencies>
 		<Files>
@@ -37,6 +38,7 @@ tof : CLASS
 	input 	: SvrCh_DINT;
 	targetTime 	: SvrCh_DINT;
 	elapsedTime 	: SvrCh_UDINT;
+	timeStamp 	: SvrCh_UDINT;
   //Clients:
   //Variables:
   //Functions:
@@ -63,7 +65,7 @@ FUNCTION GLOBAL TAB tof::@CT_
 0$UINT,
 2#0100000000000010$UINT, //TY_TOF
 0$UINT, 0$UINT, (SIZEOF(::tof))$UINT, 
-4$UINT, 0$UINT, 0$UINT, 
+5$UINT, 0$UINT, 0$UINT, 
 TO_UDINT(2091575313), "tof", //Class
 TO_UDINT(0), 0, 0$UINT, 0$UINT, //Baseclass
 //Servers:
@@ -71,6 +73,7 @@ TO_UDINT(0), 0, 0$UINT, 0$UINT, //Baseclass
 (::tof.input.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(796717159), "input", 
 (::tof.targetTime.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(3866148469), "targetTime", 
 (::tof.elapsedTime.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(1280260988), "elapsedTime", 
+(::tof.timeStamp.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(3776248017), "timeStamp", 
 //Clients:
 END_FUNCTION
 
@@ -124,14 +127,14 @@ END_FUNCTION
 Function Global __cdecl DelayTof
 VAR_INPUT
   IN : BOOL;
-  PT : DINT; 
-  ET : ^UDINT; 
+  PT : DINT;
+  ET : ^UDINT;
+  TIMESTAMP : ^UDINT;
   CLOCK : UDINT;
 END_VAR
 VAR_OUTPUT
   Q : BOOL;
 END_VAR;
-
 
 
 FUNCTION VIRTUAL GLOBAL tof::CyWork
@@ -153,7 +156,7 @@ FUNCTION VIRTUAL GLOBAL tof::CyWork
   end_if;
 
   
-  ClassSvr := DelayTof(IN:=x , PT:= targetTime, ET:= #elapsedTime, CLOCK:= ops.tAbsolute);
+  ClassSvr := DelayTof(IN:=x, PT:=targetTime, ET:=#elapsedTime, TIMESTAMP:=#timestamp, CLOCK:=ops.tAbsolute);
   
 
 	state := READY;

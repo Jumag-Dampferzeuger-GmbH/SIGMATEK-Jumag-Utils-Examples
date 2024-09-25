@@ -14,6 +14,7 @@
 				<Server Name="elapsedTime"/>
 				<Server Name="input"/>
 				<Server Name="targetTime" Value="10000"/>
+				<Server Name="timeStamp"/>
 			</Channels>
 		</Object>
 		<Object
@@ -28,6 +29,7 @@
 				<Server Name="elapsedTime"/>
 				<Server Name="input"/>
 				<Server Name="targetTime" Value="10000"/>
+				<Server Name="timeStamp"/>
 			</Channels>
 		</Object>
 	</Components>

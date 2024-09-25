@@ -20,9 +20,10 @@
 	Objectsize         = "(284,120)">
 	<Channels>
 		<Server Name="ClassSvr" GUID="{29BE768E-7702-4FB7-AA7E-5EDFA572EA7D}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
-		<Server Name="elapsedTime" GUID="{D3A03BE2-9210-4626-B47E-9E149F2FB775}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
+		<Server Name="elapsedTime" GUID="{CEF235B4-15A8-4245-83B8-66F152946D9A}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 		<Server Name="input" GUID="{65915895-44C3-46DD-BC20-B86D6213B47A}" Visualized="false" Initialize="false" WriteProtected="false" Retentive="false"/>
 		<Server Name="targetTime" GUID="{A6A58D8F-903C-48AB-A767-F310E56766D5}" Visualized="false" Initialize="true" DefValue="10000" WriteProtected="false" Retentive="false"/>
+		<Server Name="timeStamp" GUID="{D3A03BE2-9210-4626-B47E-9E149F2FB775}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 	</Channels>
 	<Dependencies>
 		<Files>
@@ -36,6 +37,7 @@ ton : CLASS
 	ClassSvr 	: SvrChCmd_DINT;
 	input 	: SvrCh_DINT;
 	targetTime 	: SvrCh_DINT;
+	timeStamp 	: SvrCh_UDINT;
 	elapsedTime 	: SvrCh_UDINT;
   //Clients:
   //Variables:
@@ -63,13 +65,14 @@ FUNCTION GLOBAL TAB ton::@CT_
 0$UINT,
 2#0100000000000010$UINT, //TY_TON
 0$UINT, 0$UINT, (SIZEOF(::ton))$UINT, 
-4$UINT, 0$UINT, 0$UINT, 
+5$UINT, 0$UINT, 0$UINT, 
 TO_UDINT(1920032803), "ton", //Class
 TO_UDINT(0), 0, 0$UINT, 0$UINT, //Baseclass
 //Servers:
 (::ton.ClassSvr.pMeth)$UINT, _CH_CMD$UINT, 2#0000000000000000$UINT, TO_UDINT(619352855), "ClassSvr", 
 (::ton.input.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(796717159), "input", 
 (::ton.targetTime.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(3866148469), "targetTime", 
+(::ton.timeStamp.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(3776248017), "timeStamp", 
 (::ton.elapsedTime.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(1280260988), "elapsedTime", 
 //Clients:
 END_FUNCTION
@@ -124,8 +127,9 @@ END_FUNCTION
 Function Global __cdecl DelayTon
 VAR_INPUT
   IN : BOOL;
-  PT : DINT; 
-  ET : ^UDINT; 
+  PT : DINT;
+  ET : ^UDINT;
+  TIMESTAMP : ^UDINT;
   CLOCK : UDINT;
 END_VAR
 VAR_OUTPUT
@@ -152,7 +156,7 @@ FUNCTION VIRTUAL GLOBAL ton::CyWork
   end_if;
 
   
-  ClassSvr := DelayTon(IN:=x , PT:= targetTime, ET:= #elapsedTime, CLOCK:= ops.tAbsolute);
+  ClassSvr := DelayTon(IN:=x, PT:=targetTime, ET:=#elapsedTime, TIMESTAMP:=#timeStamp, CLOCK:=ops.tAbsolute);
 
 	state := READY;
 
