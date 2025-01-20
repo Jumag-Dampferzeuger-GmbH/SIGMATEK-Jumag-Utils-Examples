@@ -15,6 +15,7 @@
 				<Server Name="fMaxResult"/>
 				<Server Name="fMinArrayResult"/>
 				<Server Name="fMinResult"/>
+				<Server Name="minArrayResult"/>
 			</Channels>
 		</Object>
 		<Object

@@ -14,16 +14,16 @@ END_VAR;
 
 
 // calc the min value of two float values
-extern "C" float fMin(float f1, float f2)
+extern "C" float fMin(const float f1, const float f2)
 {
     return (f1 < f2) ? f1 : f2;
 }
 
 /* 
 
-Function Global __cdecl aMin
+Function Global __cdecl aMinF
 VAR_INPUT
-  INPUT : ^REAL;
+  pINPUT : ^REAL;
   SIZE : DINT; 
 END_VAR
 VAR_OUTPUT
@@ -33,7 +33,7 @@ END_VAR;
 */
 
 // calc the min value of an array of float values
-extern "C" float aMin(float *f , int size)
+extern "C" float aMinF(const float *f , const long int size)
 {
     float fMin = f[0];
 
@@ -60,16 +60,16 @@ END_VAR;
 
 
 // calc the max value of two float values
-extern "C" float fMax(float f1, float f2)
+extern "C" float fMax(const float f1, const float f2)
 {
   return (f1 > f2) ? f1 : f2;
 }
 
 /* 
 
-Function Global __cdecl aMax
+Function Global __cdecl aMaxF
 VAR_INPUT
-  INPUT : ^REAL;
+  pINPUT : ^REAL;
   SIZE : DINT; 
 END_VAR
 VAR_OUTPUT
@@ -79,7 +79,7 @@ END_VAR;
 */
 
 // calc the max value of an array of float values
-extern "C" float aMax(float *f , int size)
+extern "C" float aMaxF(const float *f , const int size)
 {
     float fMax = f[0];
 
@@ -93,6 +93,34 @@ extern "C" float aMax(float *f , int size)
 
 /* 
 
+Function Global __cdecl aMinF
+VAR_INPUT
+  pINPUT : ^DINT;
+  SIZE : DINT; 
+END_VAR
+VAR_OUTPUT
+  Q : DINT;
+END_VAR;
+
+*/
+
+// calc the min value of an array of DINTs
+extern "C" long int aMin(const long int *input , const long int size)
+{
+    long int minValue = input[0];
+
+    for (int i = 1; i < size; i++)
+    {
+        if (input[i] < minValue)
+            minValue = input[i];
+    }
+    return minValue; 
+}
+
+
+
+/* 
+
 Function Global __cdecl isFinite
 VAR_INPUT
   INPUT : REAL; 
@@ -103,7 +131,7 @@ END_VAR;
 
 */ 
 // true (1) if f is finite.
-extern "C" bool isFinite(float f)
+extern "C" bool isFinite(const float f)
 {
     return (f <= FLOAT_MAXVAL && f >= -FLOAT_MAXVAL) ? true : false;
 }
@@ -121,7 +149,7 @@ END_VAR;
 
 */
 // true (1) if f1 is greater than f2.
-extern "C" bool isGreater(float f1, float f2)
+extern "C" bool isGreater(const float f1, const float f2)
 {
     return (f1 > f2) ? true : false;
 }
@@ -139,7 +167,7 @@ END_VAR;
 
 */
 // true (1) if f1 is greater equal than f2.
-extern "C" bool isGreaterEqual(float f1, float f2)
+extern "C" bool isGreaterEqual(const float f1, const float f2)
 {
     return (f1 >= f2) ? true : false;
 }

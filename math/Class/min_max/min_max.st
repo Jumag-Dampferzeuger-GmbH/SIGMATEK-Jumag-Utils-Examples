@@ -30,6 +30,7 @@
 		<Server Name="fMaxResult" GUID="{BC430DF8-B0E7-44AD-A2B3-04E9A8206FB3}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 		<Server Name="fMinArrayResult" GUID="{599CB7CC-59FA-4372-80AE-F6B8A234182B}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 		<Server Name="fMinResult" GUID="{FBE552F4-9FD4-475F-B1D5-47BBD52EF5C0}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
+		<Server Name="minArrayResult" GUID="{603ECAE4-DDE9-40DE-A7BE-EE91BDDD7F1E}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 	</Channels>
 	<Dependencies>
 		<Files>
@@ -47,11 +48,14 @@ min_max : CLASS
 	fMaxResult 	: SvrCh_REAL;
 	fMinArrayResult 	: SvrCh_REAL;
 	fMaxArrayResult 	: SvrCh_REAL;
+	minArrayResult 	: SvrCh_DINT;
   //Clients:
   //Variables:
 		fTestValue0 	: REAL;
 		fTestValue1 	: REAL;
-		aTestData : ARRAY [0..ARRAY_SIZE] OF REAL;
+		aTestDataFloat : ARRAY [0..ARRAY_SIZE] OF REAL;
+
+		aTestData : ARRAY [0..ARRAY_SIZE] OF DINT;
 
   //Functions:
 	
@@ -79,7 +83,7 @@ FUNCTION GLOBAL TAB min_max::@CT_
 0$UINT,
 2#0100000000000010$UINT, //TY_MIN_MAX
 0$UINT, 0$UINT, (SIZEOF(::min_max))$UINT, 
-5$UINT, 0$UINT, 0$UINT, 
+6$UINT, 0$UINT, 0$UINT, 
 TO_UDINT(282775726), "min_max", //Class
 TO_UDINT(0), 0, 0$UINT, 0$UINT, //Baseclass
 //Servers:
@@ -88,6 +92,7 @@ TO_UDINT(0), 0, 0$UINT, 0$UINT, //Baseclass
 (::min_max.fMaxResult.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(4172167508), "fMaxResult", 
 (::min_max.fMinArrayResult.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(3715294436), "fMinArrayResult", 
 (::min_max.fMaxArrayResult.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(1683259285), "fMaxArrayResult", 
+(::min_max.minArrayResult.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(857420107), "minArrayResult", 
 //Clients:
 END_FUNCTION
 
@@ -134,9 +139,9 @@ VAR_OUTPUT
   Q : REAL;
 END_VAR;
 
-Function Global __cdecl aMin
+Function Global __cdecl aMinF
 VAR_INPUT
-  INPUT : ^REAL;
+  pINPUT : ^REAL;
   SIZE : DINT; 
 END_VAR
 VAR_OUTPUT
@@ -152,14 +157,24 @@ VAR_OUTPUT
   Q : REAL;
 END_VAR;
 
-Function Global __cdecl aMax
+Function Global __cdecl aMaxF
 VAR_INPUT
-  INPUT : ^REAL;
+  pINPUT : ^REAL;
   SIZE : DINT; 
 END_VAR
 VAR_OUTPUT
   Q : REAL;
 END_VAR;
+
+Function Global __cdecl aMin
+VAR_INPUT
+  pINPUT : ^DINT;
+  SIZE : DINT; 
+END_VAR
+VAR_OUTPUT
+  Q : DINT;
+END_VAR;
+
 
 Function Global __cdecl linCongGen
 VAR_INPUT 
@@ -190,8 +205,10 @@ FUNCTION VIRTUAL GLOBAL min_max::CyWork
   fMinResult      := fMin(CMP1:= fTestValue0 , CMP2:= fTestValue1);
   fMaxResult      := fMax(CMP1:= fTestValue0, CMP2:= fTestValue1);
    
-  fMinArrayResult := aMin(INPUT:=#aTestData[0], SIZE:=ARRAY_SIZE); // Solution 1 for passing array size
-  fMaxArrayResult := aMax(INPUT:=#aTestData[0], SIZE:=sizeof(aTestData)/4); // Solution 2 for passing array size 
+  fMinArrayResult := aMinF(pINPUT:=#aTestDataFloat[0], SIZE:=ARRAY_SIZE); // Solution 1 for passing array size
+  fMaxArrayResult := aMaxF(pINPUT:=#aTestDataFloat[0], SIZE:=sizeof(aTestDataFloat)/4); // Solution 2 for passing array size 
+  
+  minArrayResult := aMin(pINPUT:=#aTestData[0], SIZE:=sizeof(aTestData)/sizeof(DINT)); // Solution 3 for passing array size 
   
 
 	state := READY;
@@ -209,8 +226,10 @@ FUNCTION VIRTUAL GLOBAL min_max::Init
     fTestValue1 := 345345.0;
     
     for i := 0 to ARRAY_SIZE by 1 do
-      aTestData[i] := to_real(linCongGen(INPUT:=i, FACTOR:=i+1, INCREMENT:=i*3, MODULO:=1000)); 
+      aTestDataFloat[i] := to_real(linCongGen(INPUT:=i, FACTOR:=i+1, INCREMENT:=i*3, MODULO:=1000)); 
+      aTestData[i] := linCongGen(INPUT:=i, FACTOR:=i+1, INCREMENT:=i*3, MODULO:=1000); 
     end_for;
+
 
 
 END_FUNCTION

@@ -34,7 +34,7 @@
 		<Target UseFPU="true">
 		</Target>
 		<Compiler
-			CompilerVersion         = "72"
+			CompilerVersion         = "75"
 			VariableNeverUsed       = "true"
 			ValueNeverUsed          = "true"
 			LabelNeverUsed          = "true"
