@@ -23,6 +23,7 @@
 		<File Path=".\Source\randomizer.c"/>
 		<File Path=".\Class\comparing\comparing.st"/>
 		<File Path=".\Class\Finite_Finity\Finite_Finity.st"/>
+		<File Path=".\Class\trunc\trunc.st"/>
 	</ClassFiles>
 	<NetworkFiles>
 		<File Path=".\Network\Network0\Network0.lcn"/>

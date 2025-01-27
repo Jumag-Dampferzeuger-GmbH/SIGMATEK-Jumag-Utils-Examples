@@ -19,7 +19,11 @@
 	<ClassFiles>
 		<File Path=".\Class\splitDINT\splitDINT.st"/>
 		<File Path=".\Source\typeManipulation.c"/>
+		<File Path=".\Class\mergeBSINT\mergeBSINT.st"/>
 	</ClassFiles>
+	<NetworkFiles>
+		<File Path=".\Network\Network0\Network0.lcn"/>
+	</NetworkFiles>
 	<ObjectFiles>
 		<File Path=".\Loader\Source\Loader.lob" Downloadable="false"/>
 	</ObjectFiles>
@@ -27,7 +31,7 @@
 		<Target UseFPU="true">
 		</Target>
 		<Compiler
-			CompilerVersion         = "72"
+			CompilerVersion         = "75"
 			VariableNeverUsed       = "true"
 			ValueNeverUsed          = "true"
 			LabelNeverUsed          = "true"

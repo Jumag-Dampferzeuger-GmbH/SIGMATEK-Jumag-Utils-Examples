@@ -173,6 +173,80 @@ extern "C" bool isGreaterEqual(const float f1, const float f2)
 }
 
 
+/* 
+
+Function Global __cdecl truncate
+VAR_INPUT
+  INPUT : DINT;
+  BASE : DINT;
+  DIGITS : DINT; 
+END_VAR
+VAR_OUTPUT
+  Q : DINT;
+END_VAR;
+
+*/
+extern "C" long int truncate(const long int value, long int base, const long int decimalPoint)
+{
+  char maxSize = 8;
+
+  if (decimalPoint < 0)
+    return -1;
+  
+  if (decimalPoint > maxSize)
+    return -2;
+
+  long int div = 1; 
+
+   for (int i = 0; i < decimalPoint; i++)
+    div *= 10;
+
+   
+   long int moduloFactor = 1; 
+   long int temp_value = value / base;
+   for (int i = 0; i < maxSize; i++)
+   {
+     moduloFactor *= 10;
+     if(temp_value % moduloFactor == temp_value)
+     {
+        moduloFactor /= 10;
+        base = moduloFactor;
+       break;
+     }
+   }
+  long int upperPart = value / base;
+  long int lowerPart = value % base ;
+
+  lowerPart = div > base ? base : lowerPart / (base / div);
+
+   long int ret = (upperPart * div) + lowerPart;
+  return ret;
+}
+
+/* 
+
+Function Global __cdecl truncateF
+VAR_INPUT
+  INPUT : REAL;
+  DIGITS : DINT; 
+END_VAR
+VAR_OUTPUT
+  Q : REAL;
+END_VAR;
+
+*/
+
+extern "C" float truncateF(const float value, const long int digits)
+{
+    float scale = 1;
+
+    for (long int i = 0; i < digits; i++)
+    {
+        scale *= 10;
+    }
+    return (((long long)value * scale)) / scale;
+}
+
 
 
 

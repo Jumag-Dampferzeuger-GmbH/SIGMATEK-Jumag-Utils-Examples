@@ -22,7 +22,7 @@
 			Name       = "comparing1"
 			GUID       = "{964F07B9-A79A-4BE6-95D8-FB4EBA1DE72F}"
 			Class      = "comparing"
-			Position   = "(2130,660)"
+			Position   = "(2130,720)"
 			Visualized = "false"
 			CyclicTime = "100 ms">
 			<Channels>
@@ -33,11 +33,26 @@
 			Name       = "Finite_Finity1"
 			GUID       = "{079ABD7C-CBE8-4BC5-80BE-E10912D60CC5}"
 			Class      = "Finite_Finity"
-			Position   = "(2130,480)"
+			Position   = "(2130,540)"
 			Visualized = "false"
 			CyclicTime = "100 ms">
 			<Channels>
 				<Server Name="ClassSvr"/>
+			</Channels>
+		</Object>
+		<Object
+			Name       = "trunc1"
+			GUID       = "{F2CC2639-248E-4401-BAB7-D3086742234B}"
+			Class      = "trunc"
+			Position   = "(1800,930)"
+			Visualized = "false"
+			CyclicTime = "10 ms">
+			<Channels>
+				<Server Name="ClassSvr"/>
+				<Server Name="DecimalPoint_0"/>
+				<Server Name="DecimalPoint_1"/>
+				<Server Name="DecimalPoint_2"/>
+				<Server Name="raw" Value="6743"/>
 			</Channels>
 		</Object>
 	</Components>

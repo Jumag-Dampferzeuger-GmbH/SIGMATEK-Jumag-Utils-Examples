@@ -9,7 +9,7 @@
 	GUID               = "{97871922-35C6-4BA3-BD50-4C8EDC9273BA}"
 	RealtimeTask       = "false"
 	CyclicTask         = "true"
-	DefCyclictime      = "100 ms"
+	DefCyclictime      = "10 ms"
 	BackgroundTask     = "false"
 	Sigmatek           = "false"
 	OSInterface        = "false"
@@ -22,6 +22,8 @@
 		<Server Name="ClassSvr" GUID="{8F3F39C7-56F4-466C-A54D-8B999FC3AE58}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 		<Server Name="iInput" GUID="{B784AE54-188B-49A6-8476-923D71BDF1DE}" Visualized="false" Initialize="true" WriteProtected="false" Retentive="false"/>
 		<Server Name="LSB" GUID="{897BABF9-ED27-445E-A585-8F607F7A096B}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
+		<Server Name="mid_LSB" GUID="{88164139-1FDE-49F0-8C5B-5B849DFA5D92}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
+		<Server Name="mid_MSB" GUID="{E92E43FD-1395-4019-9327-D77017FB5E73}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 		<Server Name="MSB" GUID="{A7D79B67-0E19-41A4-94E6-6E69B09C085C}" Visualized="false" Initialize="false" WriteProtected="true" Retentive="false"/>
 	</Channels>
 	<Dependencies>
@@ -36,20 +38,30 @@ splitDINT : CLASS
 	ClassSvr 	: SvrChCmd_DINT;
 	iInput 	: SvrCh_DINT;
 	MSB 	: SvrCh_DINT;
+	mid_MSB 	: SvrCh_DINT;
+	mid_LSB 	: SvrCh_DINT;
 	LSB 	: SvrCh_DINT;
   //Clients:
   //Variables:
+		mMSB : BSINT
+		[
+		];
+
+		mLSB : BSINT
+		[
+		];
+
+		mMidMSB : BSINT
+		[
+		];
+
+		mMidLSB : BSINT
+		[
+		];
+
   //Functions:
 	
 	FUNCTION VIRTUAL GLOBAL CyWork
-		VAR_INPUT
-			EAX 	: UDINT;
-		END_VAR
-		VAR_OUTPUT
-			state (EAX) 	: UDINT;
-		END_VAR;
-	
-	FUNCTION VIRTUAL GLOBAL RtWork
 		VAR_INPUT
 			EAX 	: UDINT;
 		END_VAR
@@ -71,13 +83,15 @@ FUNCTION GLOBAL TAB splitDINT::@CT_
 0$UINT,
 2#0100000000000010$UINT, //TY_SPLITDINT
 0$UINT, 0$UINT, (SIZEOF(::splitDINT))$UINT, 
-4$UINT, 0$UINT, 0$UINT, 
+6$UINT, 0$UINT, 0$UINT, 
 TO_UDINT(4150147386), "splitDINT", //Class
 TO_UDINT(0), 0, 0$UINT, 0$UINT, //Baseclass
 //Servers:
 (::splitDINT.ClassSvr.pMeth)$UINT, _CH_CMD$UINT, 2#0000000000000000$UINT, TO_UDINT(619352855), "ClassSvr", 
 (::splitDINT.iInput.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(1892416893), "iInput", 
 (::splitDINT.MSB.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(2387077546), "MSB", 
+(::splitDINT.mid_MSB.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(3757851046), "mid_MSB", 
+(::splitDINT.mid_LSB.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(3728616337), "mid_LSB", 
 (::splitDINT.LSB.pMeth)$UINT, _CH_SVR$UINT, 2#0000000000000000$UINT, TO_UDINT(2407891869), "LSB", 
 //Clients:
 END_FUNCTION
@@ -103,7 +117,6 @@ FUNCTION splitDINT::@STD
 	//Command Methods
 	InitCmdTable (nCmd := nSTDCMD + USER_CNT_splitDINT, pCmd := #vmt.CmdTable);
 	vmt.CmdTable.CyWork		:= #CyWork();
-	vmt.CmdTable.RtWork		:= #RtWork();
 	ClassSvr.pMeth		:= StoreCmd (pCmd := #vmt.CmdTable, SHARED);
 
 	IF ClassSvr.pMeth THEN
@@ -126,13 +139,14 @@ END_FUNCTION
 Function Global __cdecl splitDINT
 VAR_INPUT
   IN : DINT;
-  MSB : BSINT;
-  LSB : BSINT; 
+  MSB : ^BSINT;
+  MID_MSB : ^BSINT;
+  MID_LSB : ^BSINT;
+  LSB : ^BSINT; 
 END_VAR
 VAR_OUTPUT
   Q : UINT;
 END_VAR;
-
 
 FUNCTION VIRTUAL GLOBAL splitDINT::CyWork
 	VAR_INPUT
@@ -141,9 +155,14 @@ FUNCTION VIRTUAL GLOBAL splitDINT::CyWork
 	VAR_OUTPUT
 		state (EAX) 	: UDINT;
 	END_VAR
+
   
-  
-  
+  splitDINT(IN:=iInput, MSB:=#mMSB, MID_MSB:=#mMidMSB, MID_LSB:=#mMidLSB, LSB:=#mLSB);
+ 
+  MSB := to_dint(mMSB);
+  mid_MSB := to_dint(mMidMSB);
+  mid_LSB := to_dint(mMidLSB);
+  LSB := to_dint(mLSB);
 
 	state := READY;
 

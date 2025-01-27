@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<Network Name="Network0" Revision="0.0">
+	<!-- List of Components in this network -->
+	<Components>
+		<Object
+			Name       = "mergeBSINT1"
+			GUID       = "{C6C19F6F-8ABA-40D2-B7D2-54BD24CCFE59}"
+			Class      = "mergeBSINT"
+			Position   = "(1470,900)"
+			Visualized = "false"
+			CyclicTime = "10 ms">
+			<Channels>
+				<Server Name="ClassSvr"/>
+				<Server Name="LSB" Value="98"/>
+				<Server Name="merged"/>
+				<Server Name="MSB" Value="162"/>
+			</Channels>
+		</Object>
+		<Object
+			Name       = "splitDINT1"
+			GUID       = "{6180FCB8-2156-439B-B566-6B136312CDFA}"
+			Class      = "splitDINT"
+			Position   = "(690,900)"
+			Visualized = "false"
+			CyclicTime = "10 ms">
+			<Channels>
+				<Server Name="ClassSvr"/>
+				<Server Name="iInput" Value="41570"/>
+				<Server Name="LSB"/>
+				<Server Name="mid_LSB"/>
+				<Server Name="mid_MSB"/>
+				<Server Name="MSB"/>
+			</Channels>
+		</Object>
+	</Components>
+	<Comments>
+	</Comments>
+	<!-- List of Connections in this network -->
+	<Connections>
+	</Connections>
+	<!-- Headerfiles -->
+	<Options>
+	</Options>
+</Network>
