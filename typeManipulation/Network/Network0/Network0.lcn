@@ -17,6 +17,38 @@
 			</Channels>
 		</Object>
 		<Object
+			Name       = "mergeUINT1"
+			GUID       = "{099F423F-5E7B-4A37-8A35-7334F8C38213}"
+			Class      = "mergeUINT"
+			Position   = "(1110,1380)"
+			Visualized = "false"
+			CyclicTime = "10 ms">
+			<Channels>
+				<Server Name="ClassSvr"/>
+				<Server Name="LSB" Value="6500"/>
+				<Server Name="merged"/>
+				<Server Name="MSB" Value="6500"/>
+			</Channels>
+			<!-- List of Networks in this component -->
+			<Networks>
+				<Network>
+					<!-- List of Components in this network -->
+					<Components>
+						<Object Name="_base" GUID="{B02509D0-0E3B-4367-9905-D604E0E804BA}" Class="mergeBSINT">
+							<Channels>
+								<Server Name="ClassSvr"/>
+								<Server Name="LSB" Value="6500"/>
+								<Server Name="merged"/>
+								<Server Name="MSB" Value="6500"/>
+							</Channels>
+						</Object>
+					</Components>
+					<Connections>
+					</Connections>
+				</Network>
+			</Networks>
+		</Object>
+		<Object
 			Name       = "splitDINT1"
 			GUID       = "{6180FCB8-2156-439B-B566-6B136312CDFA}"
 			Class      = "splitDINT"

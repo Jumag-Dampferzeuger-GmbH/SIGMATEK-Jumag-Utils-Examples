@@ -20,6 +20,7 @@
 		<File Path=".\Class\splitDINT\splitDINT.st"/>
 		<File Path=".\Source\typeManipulation.c"/>
 		<File Path=".\Class\mergeBSINT\mergeBSINT.st"/>
+		<File Path=".\Class\mergeUINT\mergeUINT.st"/>
 	</ClassFiles>
 	<NetworkFiles>
 		<File Path=".\Network\Network0\Network0.lcn"/>
