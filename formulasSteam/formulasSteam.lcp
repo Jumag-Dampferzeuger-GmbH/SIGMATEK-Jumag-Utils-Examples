@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <Project
-	Version            = "13"
+	Version            = "14"
 	Name               = "formulasSteam"
 	SolutionType       = "Large"
 	WriteSrvListOnSave = "true"
@@ -44,7 +44,7 @@
 		<Target UseFPU="true">
 		</Target>
 		<Compiler
-			CompilerVersion         = "72"
+			CompilerVersion         = "75"
 			VariableNeverUsed       = "true"
 			ValueNeverUsed          = "true"
 			LabelNeverUsed          = "true"

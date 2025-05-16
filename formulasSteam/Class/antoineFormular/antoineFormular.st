@@ -110,6 +110,7 @@ END_FUNCTION
 Function Global __cdecl antoineFormT
 VAR_INPUT
   INPUT : REAL;
+  OPTION : BOOL;
 END_VAR
 VAR_OUTPUT
   Q : REAL;
@@ -133,7 +134,7 @@ FUNCTION VIRTUAL GLOBAL antoineFormular::CyWork
   
   pressure := pressure.Read();
   
-  antoineTemperature := antoineFormT(INPUT:= to_real(pressure) );
+  antoineTemperature := antoineFormT(INPUT:= to_real(pressure),OPTION:= TRUE );
   
   antoinePressure := antoineFormP(INPUT:=antoineTemperature);
 
